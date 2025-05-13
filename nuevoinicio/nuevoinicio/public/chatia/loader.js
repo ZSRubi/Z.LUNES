@@ -15,7 +15,7 @@
   bubble.style.boxShadow = '0 4px 10px rgba(139, 107, 9, 0.3)';
   bubble.style.cursor = 'pointer';
   bubble.style.zIndex = '10000';
-  bubble.innerHTML = '🤖';
+bubble.innerHTML = '🐍'; // Serpiente
 
   const iframe = document.createElement('iframe');
   iframe.src = 'http://localhost:3000/chatia/chat.html';

@@ -12,6 +12,7 @@ const app = express();
 const server = http.createServer(app); // 👈 aquí creamos el servidor HTTP
 const io = socketIO(server); // 👈 aquí montamos socket.io sobre ese servidor
 const PORT = 3000;
+const fetch = require('node-fetch');
 
 // Conexión a la base de datos
 connectDB();
@@ -130,7 +131,40 @@ app.get('/api/visitas/disponibilidad', async (req, res) => {
 
 // 👉 Cargar lógica del chat
 require('./socket')(io); // tu archivo de sockets
+// Ruta para interactuar con Ollama desde el frontend
+// Ruta para interactuar con Ollama desde el frontend
+app.post('/api/generate', async (req, res) => {
+  const { model = 'llama2', prompt, stream = false } = req.body;
 
+  if (!prompt || typeof prompt !== 'string') {
+    return res.status(400).json({ error: 'El prompt es obligatorio y debe ser texto' });
+  }
+
+  try {
+    // Verificamos si Ollama está en funcionamiento
+    const check = await fetch('http://localhost:11434');  // Aquí verificamos si Ollama responde
+    if (!check.ok) throw new Error('Ollama no está disponible');
+
+    // Enviar la petición a Ollama
+    const response = await fetch('http://localhost:11434/api/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model, prompt, stream })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Ollama respondió con error: ${errorText}`);
+    }
+
+    const data = await response.json();
+    res.json(data);  // Enviar la respuesta de Ollama al frontend
+
+  } catch (err) {
+    console.error('❌ Error al conectar con Ollama:', err.message || err);
+    res.status(500).json({ error: 'No se pudo obtener respuesta de Ollama' });
+  }
+});
 // ✅ Iniciar servidor
 server.listen(PORT, () => {
   console.log(`✅ Servidor con Socket.IO activo en http://localhost:${PORT}`);
