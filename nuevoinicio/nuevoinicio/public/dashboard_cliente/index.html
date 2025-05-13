@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Espacio | Inmobiliaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Encabezado -->
+    <header class="user-header">
+        <div class="user-info">
+          <div class="user-avatar" id="userAvatar">C</div>
+          <div class="user-details">
+            <h1 id="nombreUsuario">Nombre Cliente</h1>
+            <p class="user-contact">
+              <span id="correoUsuario">cliente@email.com</span> | 
+              ID: <span id="idUsuario">CLI-001</span>
+            </p>
+          </div>
+        </div>
+        <button class="btn-logout" onclick="cerrarSesion()">
+          <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+        </button>
+      </header>
+  
+    <!-- Sección de propiedades -->
+    <section class="dashboard-section">
+        <h2 class="section-title">
+          <i class="fas fa-home"></i> Mis Propiedades
+        </h2>
+        
+        <!-- Sección Propiedades -->
+        <section class="dashboard-section">
+          <h2 class="section-title">
+            <i class="fas fa-home"></i> Propiedades Disponibles
+          </h2>
+          
+          <div class="properties-scroll-container">
+            <div class="properties-scroll">
+            
+              <!-- Propiedad 1 -->
+            <div class="property-card">
+              <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                <div class="property-badge">En Venta</div>
+              </div>
+              <div class="property-details">
+                <h3 class="property-title">Casa Residencial en Bosque</h3>
+                <p class="property-description">Amplia casa de 3 dormitorios con jardín y piscina, acabados de lujo en zona residencial exclusiva.</p>
+                
+                <div class="property-meta">
+                  <span><i class="fas fa-ruler-combined"></i> 240 m²</span>
+                  <span><i class="fas fa-bed"></i> 3 Dorm.</span>
+                  <span><i class="fas fa-bath"></i> 2 Baños</span>
+                </div>
+                
+                <button class="btn-location" data-address="Av. Bosques 123, Ciudad" onclick="window.open('https://maps.app.goo.gl/FRrzubNSbgmQvrSZ7', '_blank')">
+                  <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+                </button>
+
+                <!-- Mapa visible por defecto -->
+                <div class="map-container" style="margin-top: 10px; width: 300px; height: 200px;">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.682885949272!2d-71.54561723002837!3d-16.390108712052832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b2522e87ecb%3A0x54ff282c9789ee08!2sEdificio%20nasya%202!5e0!3m2!1ses!2spe!4v1745785846526!5m2!1ses!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+
+                <div class="property-agent">
+                  <div class="agent-avatar">AH</div>
+                  <div class="agent-info">
+                    <strong>Ana Herrera</strong>
+                    <span>Agente Inmobiliario</span>
+                  </div>
+                </div>
+                
+                <a href="#" class="btn-action">
+                  <i class="fas fa-envelope"></i> Contactar Agente
+                </a>
+              </div>
+            </div>
+                          <!-- Propiedad 2 -->
+
+              <div class="property-card">
+                <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                  <div class="property-badge">En Alquiler</div>
+                </div>
+                <div class="property-details">
+                  <h3 class="property-title">Departamento Premium</h3>
+                  <p class="property-description">Moderno departamento en torre exclusiva con amenities: gimnasio, piscina y seguridad 24/7.</p>
+                  
+                  <div class="property-meta">
+                    <span><i class="fas fa-ruler-combined"></i> 120 m²</span>
+                    <span><i class="fas fa-bed"></i> 2 Dorm.</span>
+                    <span><i class="fas fa-bath"></i> 2 Baños</span>
+                  </div>
+                  
+                  <button class="btn-location" data-address="Av. Bosques 123, Ciudad" onclick="window.open('https://maps.app.goo.gl/dyAabJdGNoiDiSzy9', '_blank')">
+                    <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+                  </button>
+                  
+                  <!-- Mapa visible por defecto -->
+                <div class="map-container" style="margin-top: 10px; width: 300px; height: 200px;">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.8442604103398!2d-71.5514014257989!3d-16.381894037693986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424bfd3e579407%3A0x5825a93fb44df59e!2sEdificios%20Condomio%20Home!5e0!3m2!1ses!2spe!4v1745805349545!5m2!1ses!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                  <div class="property-agent">
+                    <div class="agent-avatar">CM</div>
+                    <div class="agent-info">
+                      <strong>Carlos Mendoza</strong>
+                      <span>Agente Inmobiliario</span>
+                    </div>
+                  </div>
+                  
+                  <a href="#" class="btn-action">
+                    <i class="fas fa-envelope"></i> Contactar Agente
+                  </a>
+                </div>
+              </div>
+              
+              <!-- Propiedad 3 -->
+              <div class="property-card">
+                <div class="property-image" style="background-image: url('https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80');">
+                  <div class="property-badge">En Venta</div>
+                </div>
+                <div class="property-details">
+                  <h3 class="property-title">Oficina Corporativa</h3>
+                  <p class="property-description">Oficinas en zona financiera, listas para mudarse, con estacionamiento privado y áreas comunes.</p>
+                  
+                  <div class="property-meta">
+                    <span><i class="fas fa-ruler-combined"></i> 350 m²</span>
+                    <span><i class="fas fa-building"></i> 4 Oficinas</span>
+                    <span><i class="fas fa-car"></i> 5 Estac.</span>
+                  </div>
+                  
+                  <button class="btn-location" data-address="Av. Bosques 123, Ciudad" onclick="window.open('https://maps.app.goo.gl/cf2QagUHLCwJb8mg8', '_blank')">
+                    <i class="fas fa-map-marker-alt"></i> Ver Ubicación
+                  </button>
+                  
+                  <!-- Mapa visible por defecto -->
+                <div class="map-container" style="margin-top: 10px; width: 300px; height: 200px;">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.802031998284!2d-71.54261682579889!3d-16.384044037748918!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424b652103282d%3A0xbdaa6117dbd96914!2sCasa!5e0!3m2!1ses!2spe!4v1745805453873!5m2!1ses!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                  <div class="property-agent">
+                    <div class="agent-avatar">AT</div>
+                    <div class="agent-info">
+                      <strong>Ana Torres</strong>
+                      <span>Agente Comercial</span>
+                    </div>
+                  </div>
+                  
+                  <a href="#" class="btn-action">
+                    <i class="fas fa-envelope"></i> Contactar Agente
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+  
+    <!-- Sección de contratos -->
+    <section class="dashboard-section">
+      <div class="contract-item">
+            <div class="contract-info">
+              <h3>Contrato de Compraventa #CT-2023-125</h3>
+              <p class="contract-date">Firmado el 15/10/2023</p>
+              <p>Casa Residencial en Bosque</p>
+            </div>
+            <div class="contract-actions-container" style="display: flex; gap: 10px; align-items: center;">
+              <a href="#" class="btn-action">
+                <i class="fas fa-download"></i> Descargar
+              </a>
+              <a href="#" class="btn-action">
+                <i class="fas fa-upload"></i> Subir Firma
+              </a>
+            </div>
+          </div>
+          
+          <!-- Contrato 2 -->
+          <div class="contract-item">
+            <div class="contract-info">
+              <h3>Contrato de Reserva #CT-2023-124</h3>
+              <p class="contract-date">Firmado el 10/10/2023</p>
+              <p>Departamento Premium</p>
+            </div>
+            <div class="contract-actions-container" style="display: flex; gap: 10px; align-items: center;">
+              <a href="#" class="btn-action">
+                <i class="fas fa-download"></i> Descargar
+              </a>
+              <a href="#" class="btn-action">
+                <i class="fas fa-upload"></i> Subir Firma
+              </a>
+            </div>
+          </div>
+        </div>
+    </section>
+  
+    <!-- Sección combinada de visitas -->
+<div class="dashboard-section">
+  <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
+    <h2><i class="fas fa-calendar-alt"></i> Gestionar Visitas</h2>
+  </div>
+  
+  <div class="visits-section">
+    <!-- Formulario horizontal -->
+     
+    <div class="visits-form-container">
+      <form id="solicitarVisitaForm" action="/programar-visita?origin=dashboard1" method="POST" enctype="application/x-www-form-urlencoded">
+        <h3><i class="fas fa-plus-circle"></i> Programar Nueva Visita</h3>
+        
+        <div class="form-row">
+          <div class="form-group-horizontal">
+            <label for="propiedadVisita"><i class="fas fa-home"></i> Propiedad</label>
+            <select id="propiedadVisita" name="propiedadVisita" required>
+              <option value="">Seleccionar propiedad</option>
+              <option value="PROP-001">Casa</option>
+              <option value="PROP-002">Departamento</option>
+              <option value="PROP-003">Oficina</option>
+              <option value="PROP-003">Terreno</option>
+            </select>
+          </div>
+      
+          <div class="form-group-horizontal">
+            <label for="fechaVisita"><i class="far fa-calendar"></i> Fecha</label>
+            <input type="date" id="fechaVisita" name="fechaVisita" required>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group-horizontal">
+            <label for="horaVisita"><i class="far fa-clock"></i> Hora</label>
+            <select id="horaVisita" name="horaVisita" required>
+              <option value="">Seleccionar hora</option>
+              <option value="09:00">9:00 AM</option>
+              <option value="10:00">10:00 AM</option>
+              <option value="11:00">11:00 AM</option>
+              <option value="15:00">3:00 PM</option>
+              <option value="16:00">4:00 PM</option>
+            </select>
+          </div>
+          
+          <div class="form-group-horizontal">
+            <label for="clienteVisita"><i class="fas fa-user"></i> Cliente</label>
+            <select id="clienteVisita" name="clienteVisita" required>
+              <option value="">Seleccionar cliente</option>
+              <option value="CLI-001">María González</option>
+              <option value="CLI-002">Jose Mendoza</option>
+              <option value="CLI-003">Ana Torres</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-actions-horizontal">
+          <button type="reset" class="btn-action" style="background-color: var(--color-gris-claro);">
+            <i class="fas fa-times"></i> Limpiar
+          </button>
+          <button type="submit" class="btn-action">
+            <i class="fas fa-paper-plane"></i> Programar Visita
+          </button>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Tabla de visitas -->
+    <div class="visits-table-container">
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha/Hora</th>
+              <th>Cliente</th>
+              <th>Propiedad</th>
+              <th>Estado</th>
+              <th>Gestión</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>25/10/2023 - 10:00 AM</td>
+              <td>María González</td>
+              <td>Casa Residencial en Bosque</td>
+              <td><span class="status scheduled">Confirmada</span></td>
+              <td>
+                <div class="status-actions">
+                  <button class="btn-status pending" data-visit-id="1" title="Marcar como Pendiente">
+                    <i class="fas fa-clock"></i>
+                  </button>
+                  <button class="btn-status completed" data-visit-id="1" title="Marcar como Realizada">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="btn-status cancelled" data-visit-id="1" title="Cancelar Visita">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>26/10/2023 - 04:00 PM</td>
+              <td>Carlos Mendoza</td>
+              <td>Departamento Premium</td>
+              <td><span class="status pending">Pendiente</span></td>
+              <td>
+                <div class="status-actions">
+                  <button class="btn-status pending" data-visit-id="2" title="Marcar como Pendiente">
+                    <i class="fas fa-clock"></i>
+                  </button>
+                  <button class="btn-status completed" data-visit-id="2" title="Marcar como Realizada">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="btn-status cancelled" data-visit-id="2" title="Cancelar Visita">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>27/10/2023 - 11:30 AM</td>
+              <td>Ana Torres</td>
+              <td>Oficina Corporativa</td>
+              <td><span class="status cancelled">Cancelada</span></td>
+              <td>
+                <div class="status-actions">
+                  <button class="btn-status pending" data-visit-id="3" title="Marcar como Pendiente">
+                    <i class="fas fa-clock"></i>
+                  </button>
+                  <button class="btn-status completed" data-visit-id="3" title="Marcar como Realizada">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="btn-status cancelled" data-visit-id="3" title="Cancelar Visita">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  
+
+
+</div>
+<script src="./script.js"></script>
+
+<script src="/socket.io/socket.io.js"></script>
+
+<script src="/chatsocketio/loader.js"></script>
+
+</body>
+</html>

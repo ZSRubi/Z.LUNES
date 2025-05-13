@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>INMOBILIARIA</title>
+  <meta name="title" content="INMOBILIARIA SENATI">
+  <meta name="description" content="TRABAJO DE INMOBILIARIA MONGODB">
+  <link rel="shortcut icon" href="assets/img/in2.png" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="preload" as="image" href="./assets/img/A1.jpg">
+  <link rel="preload" as="image" href="./assets/img/A2.jpg">
+  <link rel="preload" as="image" href="./assets/img/A3.jpg">
+</head>
+
+<body id="top">
+
+  <div class="preload" data-preaload>
+    <div class="circle"></div>
+    <p class="text">INMOBILIARIA</p>
+  </div>
+
+  <div class="topbar">
+    <div class="container">
+      <address class="topbar-item">
+        <div class="icon">
+          <ion-icon name="location-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">
+          INMOBILIARIA, AREQUIPA
+        </span>
+      </address>
+
+      <div class="separator"></div>
+
+      <div class="topbar-item item-2">
+        <div class="icon">
+          <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">Daily : 8.00 am to 10.00 pm</span>
+      </div>
+
+      <a href="tel:+11234567890" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="call-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">+51 99999999</span>
+      </a>
+
+      <div class="separator"></div>
+
+      <a href="mailto:booking@restaurant.com" class="topbar-item link">
+        <div class="icon">
+          <ion-icon name="mail-outline" aria-hidden="true"></ion-icon>
+        </div>
+        <span class="span">booking@Inmobiliaria.com</span>
+      </a>
+    </div>
+  </div>
+
+  <header class="header" data-header>
+    <div class="container">
+      <a href="#" class="logo">
+        <img src="./assets/img/in2.png" width="120" height="38" alt="Grilli - Home">
+      </a>
+
+      <nav class="navbar" data-navbar>
+        <button class="close-btn" aria-label="close menu" data-nav-toggler>
+          <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
+        </button>
+
+        <a href="#" class="logo">
+          <img src="./assets/images/logo.svg" width="120" height="38" alt="Grilli - Home">
+        </a>
+
+        <ul class="navbar-list">
+          <li class="navbar-item">
+            <a href="#home" class="navbar-link hover-underline active">
+              <div class="separator"></div>
+              <span class="span">Inicio</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#menu" class="navbar-link hover-underline">
+              <div class="separator"></div>
+              <span class="span">Inmuebles</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="register.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+              <span class="span">Registrate</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="login.html" class="navbar-link hover-underline">
+              <div class="separator"></div>
+              <span class="span">Inicio Sesion</span>
+            </a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="#contacto" class="navbar-link hover-underline"> <!-- Cambiado de "#" a "#contacto" -->
+                <div class="separator"></div>
+                <span class="span">Contáctanos</span>
+            </a>
+        </li>
+        </ul>
+
+        <div class="text-center">
+          <p class="headline-1 navbar-title">Visit Us</p>
+          <address class="body-4">
+            Inmobiliaria <br>
+           perú AREQUIPA
+          </address>
+          <p class="body-4 navbar-text">Open: 9.30 am - 2.30pm</p>
+          <a href="mailto:booking@grilli.com" class="body-4 sidebar-link">booking@Inmobiliaria.com</a>
+          <div class="separator"></div>
+          <p class="contact-label">Booking Request</p>
+          <a href="tel:+88123123456" class="body-1 contact-number hover-underline">
+            +51 92345890764
+          </a>
+        </div>
+      </nav>
+
+      <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
+        <span class="line line-1"></span>
+        <span class="line line-2"></span>
+        <span class="line line-3"></span>
+      </button>
+
+      <div class="overlay" data-nav-toggler data-overlay></div>
+    </div>
+  </header>
+
+  <main>
+    <article>
+      <section class="hero text-center" aria-label="home" id="home">
+        <ul class="hero-slider" data-hero-slider>
+          <li class="slider-item active" data-hero-slider-item>
+            <div class="slider-bg">
+              <img src="./assets/img/21.jpg" width="1880" height="950" alt="Familia feliz en su nuevo hogar" class="img-cover">
+            </div>
+
+      
+            <h1 class="display-1 hero-title slider-reveal">
+              Encuentra el hogar <br>
+              perfecto para tu familia
+            </h1>
+            <p class="body-2 hero-text slider-reveal">
+              Más de 20 años ayudando a familias a encontrar su lugar ideal
+            </p>
+            
+          </li>
+
+          <li class="slider-item" data-hero-slider-item>
+            <div class="slider-bg">
+              <img src="./assets/img/211.jpg" width="1880" height="950" alt="Casa moderna con jardín" class="img-cover">
+            </div>
+
+        
+            <h1 class="display-1 hero-title slider-reveal">
+              Tu patrimonio inmobiliario <br>
+              comienza hoy
+            </h1>
+            <p class="body-2 hero-text slider-reveal">
+              Asesoría experta para tomar la mejor decisión de compra
+            </p>
+            
+          </li>
+
+          <li class="slider-item" data-hero-slider-item>
+            <div class="slider-bg">
+              <img src="./assets/img/i2.jpg" width="1880" height="950" alt="Departamento con vista panorámica" class="img-cover">
+            </div>
+
+            <h1 class="display-1 hero-title slider-reveal">
+              Vive donde siempre <br>
+              has soñado
+            </h1>
+            <p class="body-2 hero-text slider-reveal">
+              Propiedades seleccionadas en las mejores zonas de la ciudad
+            </p>
+            
+          </li>
+        </ul>
+
+        <button class="slider-btn prev" aria-label="slide to previous" data-prev-btn>
+          <ion-icon name="chevron-back"></ion-icon>
+        </button>
+
+        <button class="slider-btn next" aria-label="slide to next" data-next-btn>
+          <ion-icon name="chevron-forward"></ion-icon>
+        </button>
+
+      
+      </section>
+
+      <section class="section service bg-black-10 text-center" aria-label="service">
+        <div class="container">
+          <h2 class="headline-1 section-title" style="padding-bottom: 200px;">
+            Algunas personas buscan una casa nueva, aquí les entregamos un hogar.
+          </h2>
+
+          <ul class="grid-list">
+            <li>
+              <div class="service-card">
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="./assets/img/home1.jpg" width="285" height="336" loading="lazy" alt="Breakfast"
+                      class="img-cover">
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="title-4 card-title" style="margin-bottom: 15px;">
+                    <a href="#">Casas</a>
+                  </h3>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="./assets/img/home2.jpg" width="285" height="336" loading="lazy" alt="Appetizers"
+                      class="img-cover">
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="title-4 card-title" style="margin-bottom: 15px;">
+                    <a href="#">Departamentos</a>
+                  </h3>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="service-card">
+                <a href="#" class="has-before hover:shine">
+                  <figure class="card-banner img-holder" style="--width: 285; --height: 336;">
+                    <img src="./assets/img/home3.jpg" width="285" height="336" loading="lazy" alt="Drinks"
+                      class="img-cover">
+                  </figure>
+                </a>
+                <div class="card-content">
+                  <h3 class="title-4 card-title" style="margin-bottom: 15px;">
+                    <a href="#">Lotes</a>
+                  </h3>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section about text-center" aria-labelledby="about-label" id="about">
+        <div class="container">
+          <div class="about-content">
+            <h2 class="headline-1 section-title">Nuestra Historia en Bienes Raíces</h2>
+            <p class="highlight">"La satisfacción de nuestros clientes construye nuestro legado"</p>
+            <p>En el corazón de cada transacción inmobiliaria exitosa hay una conexión humana. No solo vendemos propiedades, <strong>creamos hogares</strong> y <strong>construimos sueños</strong>.</p>
+            <div class="contact-label">Comunicate al: </div>
+            <a href="tel:+804001234567" class="body-1 contact-number hover-underline">+99999999</a>
+          </div>
+
+          <figure class="about-banner">
+            <img src="./assets/img/home5.jpg" width="570" height="570" loading="lazy" alt="about banner"
+              class="w-100" data-parallax-item data-parallax-speed="1">
+          </figure>
+        </div>
+      </section>
+
+      <section class="special-dish text-center" aria-labelledby="dish-label">
+        <div class="special-dish-banner">
+          <img src="./assets/img/home6.jpg" width="940" height="900" loading="lazy" alt="special dish"
+            class="img-cover">
+        </div>
+
+        <div class="special-dish-content bg-black-10">
+          <div class="container">
+            <h2 class="headline-1 section-title">Nuevos Lotes Exclusivos</h2>
+            <p class="section-text">
+              Más que vender terrenos, construimos sueños y legados familiares.<br>
+              Precisión en el precio: justo para vendedores, atractivo para inversionistas.<br>
+              En tiempos de cambio, transformamos propiedades en oportunidades de crecimiento.<br>
+              No ofrecemos lotes, brindamos soluciones a tus proyectos de vida.<br>
+              Cada venta representa el inicio de una nueva historia familiar.<br>
+              Nuestra dedicación convierte espacios vacíos en futuros prósperos.<br>
+              La verdadera fidelidad nace cuando superamos las expectativas del cliente.
+            </p>
+
+            <div class="wrapper">
+              <del class="del body-3">$40.00</del>
+              <span class="span body-1">$20.00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section menu" aria-label="menu-label" id="menu">
+        <div class="container">
+          <h2 class="headline-1 section-title text-center">Nuestros Inmuebles</h2>
+
+          <ul class="grid-list">
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/f1.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                  <h3 class="title-3">
+                    <a href="#" class="card-title">Exclusiva Residencia</a>
+                  </h3>
+                  <span class="span title-2">$2550</span>
+                </div>
+                <p class="card-text label-1">
+                  Cada hogar cuenta una historia única - aquí comienza el próximo capítulo de la tuya.
+                </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/i4.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title">Lote Premium</a>
+                    </h3>
+                    <span class="span title-2">$4000</span>
+                  </div>
+                  <p class="card-text label-1">
+                    Este terreno es tu oportunidad para construir el futuro que imaginas.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/f3.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title">Departamentos Exclusivos</a>
+                    </h3>
+                    <span class="span title-2">$1000</span>
+                  </div>
+                  <p class="card-text label-1">
+                    El mejor momento para invertir es ahora - tu futuro comienza con esta decisión.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/f4.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title">Oportunidad de Alquiler</a>
+                    </h3>
+                    <span class="span title-2">$3900</span>
+                  </div>
+                  <p class="card-text label-1">
+                    Cada propiedad alquilada es un paso hacia tu independencia financiera.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/i1.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title">Propiedades Premium</a>
+                    </h3>
+                    <span class="span title-2">$2500</span>
+                  </div>
+                  <p class="card-text label-1">
+                    ¿Ya te imaginas viviendo aquí? Hoy puedes hacerlo realidad.
+                  </p>
+                </div>
+              </div>
+            </li>
+
+            <li>
+              <div class="menu-card hover:card">
+                <figure class="card-banner" style="width: 250px; height: 250px; overflow: hidden; display: inline-block;">
+                  <img src="./assets/img/f6.jpg"
+                       width="100"
+                       height="100"
+                       loading="lazy"
+                       alt="Lasagne"
+                       style="width: 100%; height: 100%; object-fit: cover;">
+                </figure>
+                <div>
+                  <div class="title-wrapper">
+                    <h3 class="title-3">
+                      <a href="#" class="card-title">MiniDepartamento Familiar</a>
+                    </h3>
+                    <span class="span title-2">$4900</span>
+                  </div>
+                  <p class="card-text label-1">
+                    El espacio perfecto para comenzar - crece cuando tu familia lo necesite.
+                  </p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section testi text-center has-bg-image"
+        style="background-image: url('./assets/img/home3.jpg')" aria-label="testimonials">
+        <div class="container">
+          <div class="quote">”</div>
+          <p class="headline-2 testi-text">
+            La casa de tus sueños existe, y la tenemos nosotros.
+          </p>
+          <div class="wrapper">
+            <div class="separator"></div>
+            <div class="separator"></div>
+            <div class="separator"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="reservation" id="contacto">
+        <div class="container">
+          <div class="form reservation-form bg-black-10">
+            <form action="" class="form-left">
+              <h2 class="headline-1 text-center">Solicitar Visita</h2>
+              <p class="form-text text-center">
+                ¿Interesado en una propiedad? <a href="tel:+9999999999" class="link">Llámanos: +9999999999</a>
+              </p>
+
+              <div class="input-wrapper">
+                <input type="text" name="name" placeholder="Nombre completo" autocomplete="off" class="input-field">
+                <input type="tel" name="phone" placeholder="Teléfono" autocomplete="off" class="input-field">
+                <input type="email" name="email" placeholder="Correo electrónico" autocomplete="off" class="input-field">
+              </div>
+
+              <div class="input-wrapper">
+                <div class="icon-wrapper">
+                  <ion-icon name="home-outline" aria-hidden="true"></ion-icon>
+                  <select name="property-type" class="input-field">
+                    <option value="">Tipo de propiedad</option>
+                    <option value="casa">Casa</option>
+                    <option value="departamento">Departamento</option>
+                    <option value="terreno">Terreno</option>
+                    <option value="local">Local Comercial</option>
+                  </select>
+                  <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+                </div>
+
+                <div class="icon-wrapper">
+                  <ion-icon name="calendar-clear-outline" aria-hidden="true"></ion-icon>
+                  <input type="date" name="visit-date" class="input-field">
+                  <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+                </div>
+
+                <div class="icon-wrapper">
+                  <ion-icon name="time-outline" aria-hidden="true"></ion-icon>
+                  <select name="visit-time" class="input-field">
+                    <option value="09:00am">09:00 am</option>
+                    <option value="10:00am">10:00 am</option>
+                    <option value="11:00am">11:00 am</option>
+                    <option value="12:00pm">12:00 pm</option>
+                    <option value="01:00pm">01:00 pm</option>
+                    <option value="02:00pm">02:00 pm</option>
+                    <option value="03:00pm">03:00 pm</option>
+                    <option value="04:00pm">04:00 pm</option>
+                    <option value="05:00pm">05:00 pm</option>
+                  </select>
+                  <ion-icon name="chevron-down" aria-hidden="true"></ion-icon>
+                </div>
+              </div>
+
+              <textarea name="message" placeholder="Propiedad de interés o mensaje adicional" autocomplete="off" class="input-field"></textarea>
+
+              <button type="submit" class="btn btn-secondary">
+                <span class="text text-1">Agendar Visita</span>
+                <span class="text text-2" aria-hidden="true">Agendar Visita</span>
+              </button>
+            </form>
+
+            <div class="form-right text-center" style="background-image: url('./assets/images/form-pattern.png')">
+              <h2 class="headline-1 text-center">Contacto</h2>
+              <p class="contact-label">Visitas y consultas</p>
+              <a href="tel:+9999999999" class="body-1 contact-number hover-underline">+9999999999</a>
+              <div class="separator"></div>
+              <p class="contact-label">Oficina Principal</p>
+              <address class="body-4">
+                Edificio Nasya - Av. Ejército 101, Arequipa 04013,<br>
+                Arequipa, Perú
+              </address>
+              <p class="contact-label">Horario de atención</p>
+              <p class="body-4">
+                Lunes a Viernes<br>
+                9:00 am - 6:00 pm
+              </p>
+              <p class="contact-label">Sábados</p>
+              <p class="body-4">
+                10:00 am - 2:00 pm
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mapa de Google -->
+        <div class="google-map-container">
+          <h3 class="text-center">Cómo llegar</h3>
+          <iframe 
+            width="100%" 
+            height="450" 
+            frameborder="0" 
+            style="border:0" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.63910554515!2d-71.54365542579862!3d-16.392336637960938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91424a44c12af4e5%3A0xbc9ab50d5f2db333!2sEdificio%20Nasya%2C%20Av.%20Ej%C3%A9rcito%20101%2C%20Arequipa%2004013!5e0!3m2!1ses!2spe!4v1745783245700!5m2!1ses!2spe" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </section>
+    </article>
+  </main>
+
+  <!-- <footer class="footer section has-bg-image text-center"
+    style="background-image: url('./assets/images/footer-bg.jpg')">
+    <div class="container">
+      <div class="footer-bottom">
+        <p class="copyright">
+          &copy; 2022 Grilli. All Rights Reserved | Crafted by <a href="https://github.com/codewithsadee"
+            target="_blank" class="link">codewithsadee</a>
+        </p>
+      </div>
+    </div>
+  </footer> -->
+
+  <a href="#top" class="back-top-btn active" aria-label="back to top" data-back-top-btn>
+    <ion-icon name="chevron-up" aria-hidden="true"></ion-icon>
+  </a>
+  
+
+  <script src="./assets/js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="http://localhost:3000/chatia/loader.js"></script>
+ 
+</body>
+</html>

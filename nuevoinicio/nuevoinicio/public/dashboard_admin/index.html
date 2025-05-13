@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrativo | Inmobiliaria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Inmobiliaria</h2>
+        <p>Panel Administrativo</p>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-link">
+          <div class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
+          </div>
+        </a>
+        <a href="#propiedades" class="nav-link">
+          <div class="nav-item">
+            <i class="fas fa-home"></i>
+            Propiedades
+          </div>
+        </a>
+        
+        <!-- Menú desplegable de Usuarios -->
+        <div class="nav-item nav-parent">
+          <i class="fas fa-users"></i>
+          Usuarios
+          <i class="fas fa-chevron-down nav-toggle"></i>
+        </div>
+        <div class="nav-submenu">
+          <a href="#agentes" class="nav-link">
+            <div class="nav-item">
+              <i class="fas fa-user-tie"></i>
+              Agentes
+            </div>
+          </a>
+          <a href="#clientes" class="nav-link">
+            <div class="nav-item">
+              <i class="fas fa-user-friends"></i>
+              Clientes
+            </div>
+          </a>
+        </div>
+        <!-- Fin del menú desplegable -->
+        
+        <a href="#contratos" class="nav-link">
+          <div class="nav-item">
+            <i class="fas fa-file-contract"></i>
+            Contratos
+          </div>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Sección Dashboard -->
+      <section id="dashboard" class="section">
+        <div class="header">
+          <div class="user-info">
+            <div class="user-avatar" id="avatarInitials">A</div>
+            <div class="user-details">
+              <h2 id="nombreUsuario">Administrador</h2>
+              <span class="user-role">Admin</span>
+            </div>
+          </div>
+          
+          <button class="btn btn-logout" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+          </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <i class="fas fa-home"></i>
+            <h3>Propiedades Activas</h3>
+            <div class="value">24</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-user-tie"></i>
+            <h3>Agentes</h3>
+            <div class="value">8</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <h3>Clientes</h3>
+            <div class="value">148</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-file-signature"></i>
+            <h3>Contratos Activos</h3>
+            <div class="value">42</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Propiedades -->
+      <section id="propiedades" class="section">
+        <h3 class="section-title"><i class="fas fa-home"></i> Propiedades Recientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#INM-125</td>
+                <td>Av. Principal 123</td>
+                <td>Casa</td>
+                <td>$250,000</td>
+                <td><span class="status active">Activa</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#INM-124</td>
+                <td>Calle Secundaria 456</td>
+                <td>Departamento</td>
+                <td>$180,000</td>
+                <td><span class="status active">Activa</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#INM-123</td>
+                <td>Boulevard Norte 789</td>
+                <td>Oficina</td>
+                <td>$320,000</td>
+                <td><span class="status pending">En revisión</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
+      </section>
+
+      <!-- Sección Agentes -->
+      <section id="agentes" class="section">
+        <h3 class="section-title"><i class="fas fa-user-tie"></i> Agentes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Propiedades</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#AGT-008</td>
+                <td>Carlos Mendoza</td>
+                <td>carlos@inmobiliaria.com</td>
+                <td>+51 987654321</td>
+                <td>12</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#AGT-007</td>
+                <td>Laura Ríos</td>
+                <td>laura@inmobiliaria.com</td>
+                <td>+51 987654322</td>
+                <td>8</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#AGT-006</td>
+                <td>Jorge Torres</td>
+                <td>jorge@inmobiliaria.com</td>
+                <td>+51 987654323</td>
+                <td>15</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección Clientes -->
+      <section id="clientes" class="section">
+        <h3 class="section-title"><i class="fas fa-users"></i> Clientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Intereses</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#CLI-148</td>
+                <td>María González</td>
+                <td>maria@example.com</td>
+                <td>+51 987654324</td>
+                <td>Casas</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CLI-147</td>
+                <td>Ana Torres</td>
+                <td>ana@example.com</td>
+                <td>+51 987654325</td>
+                <td>Departamentos</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CLI-146</td>
+                <td>Luis Sánchez</td>
+                <td>luis@example.com</td>
+                <td>+51 987654326</td>
+                <td>Oficinas</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección Contratos -->
+      <section id="contratos" class="section">
+        <h3 class="section-title"><i class="fas fa-file-contract"></i> Contratos Recientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Propiedad</th>
+                <th>Cliente</th>
+                <th>Agente</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#CTR-042</td>
+                <td>Av. Principal 123</td>
+                <td>María González</td>
+                <td>Carlos Mendoza</td>
+                <td>15/05/2023</td>
+                <td>Venta</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CTR-041</td>
+                <td>Calle Secundaria 456</td>
+                <td>Ana Torres</td>
+                <td>Laura Ríos</td>
+                <td>10/05/2023</td>
+                <td>Alquiler</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CTR-040</td>
+                <td>Boulevard Norte 789</td>
+                <td>Luis Sánchez</td>
+                <td>Jorge Torres</td>
+                <td>05/05/2023</td>
+                <td>Venta</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script src="./script.js"></script>
+
+</body>
+</html>

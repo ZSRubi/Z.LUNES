@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Widget</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="chat">
+    <div class="chat-header">
+      <span>Chat Dorado</span>
+      <button class="minimize-btn" title="Minimizar">−</button>
+    </div>
+    <div id="messages" class="messages"></div>
+    <input type="text" id="username" placeholder="Tu nombre">
+    <textarea id="writeMessage" placeholder="Tu mensaje..."></textarea>
+    <div id="writing"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Conexión con Socket.IO
+    const socket = io("http://localhost:3000");
+
+    const username = document.getElementById('username');
+    const writeMessage = document.getElementById('writeMessage');
+    const writing = document.getElementById('writing');
+    const messages = document.getElementById('messages');
+    const chat = document.querySelector('.chat');
+    const minimizeBtn = document.querySelector('.minimize-btn');
+
+    // Escuchar mensajes del servidor
+    socket.on('all-messages', (m) => {
+      let content = '';
+      for (const message of m) {
+        content += `<div class="message">${message.username}: ${message.message}</div>`;
+      }
+      messages.innerHTML = content;
+      messages.scrollTop = messages.scrollHeight;
+    });
+
+    // Emitir evento 'writing' cuando alguien esté escribiendo
+    writeMessage.addEventListener('keydown', () => {
+      socket.emit('writing', username.value);
+    });
+
+    socket.on('writing', (username) => {
+      writing.innerHTML = `${username} está escribiendo...`;
+      setTimeout(() => writing.innerHTML = '', 3000);
+    });
+
+    // Enviar nuevo mensaje
+    writeMessage.addEventListener('keyup', (event) => {
+      if (event.code === 'Enter') {
+        if (!username.value || !writeMessage.value.trim()) {
+          return alert('¡Falta nombre o mensaje!');
+        }
+        socket.emit('new-message', {
+          username: username.value,
+          message: writeMessage.value.trim()
+        });
+        writeMessage.value = "";
+      }
+    });
+
+    // Funcionalidad mejorada de minimizar el chat
+    minimizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleChat();
+    });
+
+    // Permitir expandir haciendo click en la burbuja
+    chat.addEventListener('click', (e) => {
+      if (chat.classList.contains('minimized') && e.target === chat) {
+        toggleChat();
+      }
+    });
+
+    // Reemplaza la función toggleChat por:
+    function toggleChat() {
+    const chat = document.querySelector('.chat');
+    
+    if (chat.classList.contains('minimized')) {
+        chat.classList.remove('minimized');
+        document.querySelector('.minimize-btn').textContent = '−';
+        // Enviar mensaje a la página padre
+        window.parent.postMessage({ action: 'expand' }, '*');
+    } else {
+        chat.classList.add('minimized');
+        document.querySelector('.minimize-btn').textContent = '+';
+        // Enviar mensaje a la página padre
+        window.parent.postMessage({ action: 'minimize' }, '*');
+    }
+}
+  </script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat Widget</title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    body {
+      margin: 0;
+    }
+    .chat {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .messages {
+      height: 250px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat">
+    <input type="text" id="username" placeholder="Tu nombre">
+    <div id="messages" class="messages"></div>
+    <div id="writing"></div>
+    <textarea id="writeMessage" placeholder="Tu mensaje..."></textarea>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Establecer conexión con el servidor de Socket.IO
+    const socket = io("http://localhost:3000");  // Conectar al servidor en localhost:3000
+
+    const username = document.getElementById('username');
+    const writeMessage = document.getElementById('writeMessage');
+    const writing = document.getElementById('writing');
+    const messages = document.getElementById('messages');
+
+    // Escuchar mensajes del servidor
+    socket.on('all-messages', (m) => {
+      let content = '';
+      for (const message of m) {
+        content += `<div class="message">${message.username}: ${message.message}</div><br>`;
+      }
+      messages.innerHTML = content;
+      messages.scrollTop = messages.scrollHeight;
+    });
+
+    // Emitir evento 'writing' cuando alguien esté escribiendo
+    writeMessage.addEventListener('keydown', () => {
+      socket.emit('writing', username.value);
+    });
+
+    socket.on('writing', (username) => {
+      writing.innerHTML = `${username} está escribiendo...`;
+      setTimeout(() => writing.innerHTML = '', 3000);
+    });
+
+    // Enviar nuevo mensaje
+    writeMessage.addEventListener('keyup', (event) => {
+      if (event.code === 'Enter') {
+        if (!username.value || !writeMessage.value.trim()) {
+          return alert('¡Falta nombre o mensaje!');
+        }
+        socket.emit('new-message', {
+          username: username.value,
+          message: writeMessage.value.trim()
+        });
+        writeMessage.value = "";
+      }
+    });
+  </script>
+</body>
+</html> -->

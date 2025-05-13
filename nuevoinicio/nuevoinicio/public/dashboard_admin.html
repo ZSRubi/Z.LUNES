@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Administrativo | Inmobiliaria</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --color-gris-oscuro: #2d3436;
+      --color-gris-medio: #636e72;
+      --color-gris-claro: #dfe6e9;
+      --color-dorado: #fdcb6e;
+      --color-dorado-oscuro: #e17055;
+      --color-blanco: #ffffff;
+      --color-fondo: #f5f6fa;
+      --color-exito: #27ae60;
+      --color-alerta: #f39c12;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--color-fondo);
+      color: var(--color-gris-oscuro);
+      line-height: 1.6;
+    }
+
+    .admin-container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: var(--color-gris-oscuro);
+      color: var(--color-blanco);
+      padding: 1.5rem 0;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    }
+
+    .sidebar-header {
+      padding: 0 1.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .sidebar-nav {
+      margin-top: 1.5rem;
+    }
+
+    .nav-item {
+      padding: 0.8rem 1.5rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      color: var(--color-blanco);
+    }
+
+    .nav-item:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+    .nav-item.active {
+      background: var(--color-dorado);
+      color: var(--color-gris-oscuro);
+      border-left: 4px solid var(--color-dorado-oscuro);
+    }
+
+    .nav-item i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 2rem;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--color-gris-claro);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .user-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--color-dorado);
+      color: var(--color-gris-oscuro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .user-details h2 {
+      margin-bottom: 0.2rem;
+    }
+
+    .user-role {
+      background: var(--color-dorado-oscuro);
+      color: var(--color-blanco);
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+
+    /* Stats Cards */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--color-blanco);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+      border-top: 3px solid var(--color-dorado);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .stat-card i {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dorado);
+    }
+
+    .stat-card h3 {
+      font-size: 0.9rem;
+      color: var(--color-gris-medio);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--color-gris-oscuro);
+    }
+
+    /* Tables */
+    .table-container {
+      background: var(--color-blanco);
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      margin-bottom: 2rem;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--color-gris-claro);
+    }
+
+    th {
+      background: var(--color-gris-oscuro);
+      color: var(--color-blanco);
+      font-weight: 600;
+    }
+
+    tr:hover {
+      background-color: rgba(253, 203, 110, 0.1);
+    }
+
+    .status {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    .status.active {
+      background: #d5f5e3;
+      color: var(--color-exito);
+    }
+
+    .status.pending {
+      background: #fef9e7;
+      color: var(--color-alerta);
+    }
+
+    /* Buttons */
+    .btn {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary {
+      background: var(--color-dorado);
+      color: var(--color-gris-oscuro);
+    }
+
+    .btn-primary:hover {
+      background: var(--color-dorado-oscuro);
+      color: var(--color-blanco);
+    }
+
+    .btn-danger {
+      background: var(--color-dorado-oscuro);
+      color: var(--color-blanco);
+    }
+
+    .btn-danger:hover {
+      background: #c0392b;
+    }
+
+    .btn-logout {
+      background: transparent;
+      color: var(--color-dorado-oscuro);
+      border: 1px solid var(--color-dorado-oscuro);
+    }
+
+    .btn-logout:hover {
+      background: var(--color-dorado-oscuro);
+      color: var(--color-blanco);
+    }
+
+    /* Secciones */
+    .section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 20px;
+    }
+    
+    .section-title {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-dorado);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .section-title i {
+      color: var(--color-dorado);
+    }
+    
+    /* Enlaces del sidebar */
+    .sidebar-nav a {
+      color: inherit;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .sidebar-nav a:visited {
+      color: inherit;
+    }
+    
+    .sidebar-nav a:hover, 
+    .sidebar-nav a:focus {
+      color: inherit;
+    }
+    
+    .nav-item.active:hover {
+      color: var(--color-gris-oscuro);
+    }
+
+    /* Estilos para el menú desplegable */
+    .nav-parent {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .nav-toggle {
+      margin-left: auto;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(0,0,0,0.1);
+    }
+
+    .nav-submenu .nav-item {
+      padding-left: 2.5rem;
+    }
+
+    .nav-parent.active + .nav-submenu {
+      max-height: 200px; /* Ajusta según necesidad */
+    }
+
+    .nav-parent.active .nav-toggle {
+      transform: rotate(180deg);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .admin-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .sidebar {
+        display: none;
+      }
+      
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2>Inmobiliaria</h2>
+        <p>Panel Administrativo</p>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-link">
+          <div class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            Dashboard
+          </div>
+        </a>
+        <a href="#propiedades" class="nav-link">
+          <div class="nav-item">
+            <i class="fas fa-home"></i>
+            Propiedades
+          </div>
+        </a>
+        
+        <!-- Menú desplegable de Usuarios -->
+        <div class="nav-item nav-parent">
+          <i class="fas fa-users"></i>
+          Usuarios
+          <i class="fas fa-chevron-down nav-toggle"></i>
+        </div>
+        <div class="nav-submenu">
+          <a href="#agentes" class="nav-link">
+            <div class="nav-item">
+              <i class="fas fa-user-tie"></i>
+              Agentes
+            </div>
+          </a>
+          <a href="#clientes" class="nav-link">
+            <div class="nav-item">
+              <i class="fas fa-user-friends"></i>
+              Clientes
+            </div>
+          </a>
+        </div>
+        <!-- Fin del menú desplegable -->
+        
+        <a href="#contratos" class="nav-link">
+          <div class="nav-item">
+            <i class="fas fa-file-contract"></i>
+            Contratos
+          </div>
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Sección Dashboard -->
+      <section id="dashboard" class="section">
+        <div class="header">
+          <div class="user-info">
+            <div class="user-avatar" id="avatarInitials">A</div>
+            <div class="user-details">
+              <h2 id="nombreUsuario">Administrador</h2>
+              <span class="user-role">Admin</span>
+            </div>
+          </div>
+          
+          <button class="btn btn-logout" onclick="cerrarSesion()">
+            <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+          </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <i class="fas fa-home"></i>
+            <h3>Propiedades Activas</h3>
+            <div class="value">24</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-user-tie"></i>
+            <h3>Agentes</h3>
+            <div class="value">8</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-users"></i>
+            <h3>Clientes</h3>
+            <div class="value">148</div>
+          </div>
+          
+          <div class="stat-card">
+            <i class="fas fa-file-signature"></i>
+            <h3>Contratos Activos</h3>
+            <div class="value">42</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sección Propiedades -->
+      <section id="propiedades" class="section">
+        <h3 class="section-title"><i class="fas fa-home"></i> Propiedades Recientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Dirección</th>
+                <th>Tipo</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#INM-125</td>
+                <td>Av. Principal 123</td>
+                <td>Casa</td>
+                <td>$250,000</td>
+                <td><span class="status active">Activa</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#INM-124</td>
+                <td>Calle Secundaria 456</td>
+                <td>Departamento</td>
+                <td>$180,000</td>
+                <td><span class="status active">Activa</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#INM-123</td>
+                <td>Boulevard Norte 789</td>
+                <td>Oficina</td>
+                <td>$320,000</td>
+                <td><span class="status pending">En revisión</span></td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
+      </section>
+
+      <!-- Sección Agentes -->
+      <section id="agentes" class="section">
+        <h3 class="section-title"><i class="fas fa-user-tie"></i> Agentes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Propiedades</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#AGT-008</td>
+                <td>Carlos Mendoza</td>
+                <td>carlos@inmobiliaria.com</td>
+                <td>+51 987654321</td>
+                <td>12</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#AGT-007</td>
+                <td>Laura Ríos</td>
+                <td>laura@inmobiliaria.com</td>
+                <td>+51 987654322</td>
+                <td>8</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#AGT-006</td>
+                <td>Jorge Torres</td>
+                <td>jorge@inmobiliaria.com</td>
+                <td>+51 987654323</td>
+                <td>15</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección Clientes -->
+      <section id="clientes" class="section">
+        <h3 class="section-title"><i class="fas fa-users"></i> Clientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Teléfono</th>
+                <th>Intereses</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#CLI-148</td>
+                <td>María González</td>
+                <td>maria@example.com</td>
+                <td>+51 987654324</td>
+                <td>Casas</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CLI-147</td>
+                <td>Ana Torres</td>
+                <td>ana@example.com</td>
+                <td>+51 987654325</td>
+                <td>Departamentos</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CLI-146</td>
+                <td>Luis Sánchez</td>
+                <td>luis@example.com</td>
+                <td>+51 987654326</td>
+                <td>Oficinas</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-edit"></i> Editar</button>
+                  <button class="btn btn-danger"><i class="fas fa-trash"></i> Eliminar</button>
+                  <button class="btn" style="background: #3498db; color: white;"><i class="fas fa-envelope"></i> Contactar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Sección Contratos -->
+      <section id="contratos" class="section">
+        <h3 class="section-title"><i class="fas fa-file-contract"></i> Contratos Recientes</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Propiedad</th>
+                <th>Cliente</th>
+                <th>Agente</th>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#CTR-042</td>
+                <td>Av. Principal 123</td>
+                <td>María González</td>
+                <td>Carlos Mendoza</td>
+                <td>15/05/2023</td>
+                <td>Venta</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CTR-041</td>
+                <td>Calle Secundaria 456</td>
+                <td>Ana Torres</td>
+                <td>Laura Ríos</td>
+                <td>10/05/2023</td>
+                <td>Alquiler</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+              <tr>
+                <td>#CTR-040</td>
+                <td>Boulevard Norte 789</td>
+                <td>Luis Sánchez</td>
+                <td>Jorge Torres</td>
+                <td>05/05/2023</td>
+                <td>Venta</td>
+                <td>
+                  <button class="btn btn-primary"><i class="fas fa-file-pdf"></i> Ver PDF</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io(); // Conectamos el socket al servidor
+
+  // Manejo del menú desplegable
+  document.querySelector('.nav-parent').addEventListener('click', function() {
+    this.classList.toggle('active');
+  });
+
+  // Obtener datos del usuario del localStorage
+  const nombre = localStorage.getItem('nombre') || "Administrador Demo";
+  const correo = localStorage.getItem('correo') || "admin@demo.com";
+  const id = localStorage.getItem('id') || "ADM-123";
+  const rol = localStorage.getItem('rol') || "admin";
+
+  // Apenas se conecta el socket
+  socket.on('connect', () => {
+    console.log('✅ Socket conectado con ID:', socket.id);
+
+    // Enviar rol e id correctos al servidor
+    socket.emit('set-role', {
+      role: rol,
+      id: id
+    });
+  });
+
+  // Asignar valores al DOM
+  document.getElementById('nombreUsuario').textContent = nombre;
+  document.getElementById('correoUsuario').textContent = correo;
+  document.getElementById('idUsuario').textContent = id;
+  document.getElementById('avatarInitials').textContent = nombre.charAt(0).toUpperCase();
+
+  // Mostrar datos del usuario
+  if(nombre) {
+    document.getElementById('nombreUsuario').textContent = nombre;
+    document.getElementById('avatarInitials').textContent = nombre.charAt(0).toUpperCase();
+  }
+
+  // Verificar rol
+  if(rol !== 'admin') {
+    window.location.href = 'login.html';
+  }
+
+  // Función para cerrar sesión
+  function cerrarSesion() {
+    localStorage.clear();
+    window.location.href = 'login.html';
+  }
+
+  // Activar elemento del menú según sección visible
+  const navItems = document.querySelectorAll('.nav-item');
+  const sections = document.querySelectorAll('.section');
+  
+  window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      const sectionHeight = section.clientHeight;
+      
+      if(pageYOffset >= (sectionTop - 300)) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navItems.forEach(item => {
+      item.classList.remove('active');
+      const href = item.parentElement.getAttribute('href');
+      if(href === `#${current}`) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // Smooth scroll para los enlaces del menú
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      window.scrollTo({
+        top: targetElement.offsetTop - 20,
+        behavior: 'smooth'
+      });
+      
+      // Actualizar clase activa
+      navItems.forEach(item => item.classList.remove('active'));
+      this.querySelector('.nav-item').classList.add('active');
+    });
+  });
+</script>
+
+<script src="./assets/js/chat-loader.js"></script>
+
+</body>
+</html>
+  </head>
+  <body>
+    <div class="chat-floating">
+      <div class="card" style="background-color: var(--color-gris-claro)">
+        <div class="card-body">
+          <div class="message-container" id="messages">
+            <!-- Mensajes del chat -->
+          </div>
+
+          <div class="footer-input">
+            <input
+              type="text"
+              id="inputPrompt"
+              class="form-control"
+              placeholder="Ask your question..."
+            />
+            <button
+              class="btn btn-success"
+              id="sendPromptBtn"
+              onclick="GetResponse()"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function GetResponse() {
+        sendPromptBtn.innerHTML = `Sending <div class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>`;
+        
+        const promptValue = inputPrompt.value;
+        messages.innerHTML += `<div class="chat-box">
+          <div class="user-message">
+            <small class="text-decoration-underline">You</small>
+            <p>${promptValue}</p>
+          </div>
+        </div>`;
+
+        // Preparar los datos de la solicitud
+        const requestData = {
+          model: "meta-llama/llama-4-scout-17b-16e-instruct",
+          messages: [
+            {
+              role: "user",
+              content: promptValue
+            }
+          ]
+        };
+
+        // Hacer la solicitud con fetch
+        fetch("https://api.groq.com/openai/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer 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"
+          },
+          body: JSON.stringify(requestData)
+        })
+        .then((response) => response.json())  // Convertir la respuesta a JSON
+        .then((data) => {
+          // Mostrar la respuesta de la IA
+          messages.innerHTML += `<div class="chat-box">
+            <div class="assistant-message">
+              <small class="text-decoration-underline">Virtual Assistent</small>
+              <p>${data.choices[0].message.content}</p>
+            </div>
+          </div>`;
+          inputPrompt.value = "";  // Limpiar el campo de texto
+          sendPromptBtn.innerHTML = "Send";  // Restaurar el texto del botón
+        })
+        .catch((error) => {
+          console.error("Error al contactar con la API:", error);
+        });
+      }
+    </script>
+  </body>
+</html>
+

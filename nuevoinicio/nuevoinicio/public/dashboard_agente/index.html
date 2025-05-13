@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Agente | Inmobiliaria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="header">
+      <div class="user-info">
+        <div class="user-avatar" id="avatarInitials">A</div>
+        <div class="user-details">
+          <h1 id="nombreUsuario">Agente Inmobiliario</h1>
+          <span class="user-role">Agente</span>
+          <p class="user-contact">Correo: <span id="correoUsuario">agente@inmobiliaria.com</span> | ID: <span id="idUsuario">AGT-001</span></p>
+        </div>
+      </div>
+      <button class="btn-logout" onclick="cerrarSesion()">
+        <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+      </button>
+    </header>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>Propiedades publicadas</h3>
+        <div class="value">12</div>
+      </div>
+      <div class="stat-card">
+        <h3>Visitas programadas</h3>
+        <div class="value">8</div>
+      </div>
+      <div class="stat-card">
+        <h3>Contratos creados</h3>
+        <div class="value">15</div>
+      </div>
+      <div class="stat-card">
+        <h3>Clientes activos</h3>
+        <div class="value">5</div>
+      </div>
+    </div>
+
+    <!-- Sección Propiedades -->
+    <div class="section-title">
+      <h2><i class="fas fa-home"></i> Tus propiedades</h2>
+      <button class="btn btn-primary" id="togglePropertyForm">
+        <i class="fas fa-plus"></i> Publicar inmueble
+      </button>
+    </div>
+
+    <!-- Formulario desplegable -->
+    <div class="property-form-container" id="propertyForm" style="display: none;">
+      <form id="newPropertyForm" class="horizontal-form">
+        <div class="form-group">
+          <label for="propertyAddress">Dirección</label>
+          <input type="text" id="propertyAddress" required name="propertyAddress">
+        </div>
+        
+        <div class="form-group">
+          <label for="propertyType">Tipo</label>
+          <select id="propertyType" required name="propertyType">
+            <option value="">Seleccionar</option>
+            <option value="Casa">Casa</option>
+            <option value="Departamento">Departamento</option>
+            <option value="Oficina">Oficina</option>
+            <option value="Terreno">Terreno</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="propertyPrice">Precio ($)</label>
+          <input type="number" id="propertyPrice" required name="propertyPrice">
+        </div>
+        
+        <div class="form-group">
+          <label for="propertyPhotos">Fotos</label>
+          <div class="photo-upload">
+            <input type="file" id="propertyPhotos" multiple accept="image/*" style="display: none;" name="propertyPhotos">
+            <button type="button" class="btn btn-sm" onclick="document.getElementById('propertyPhotos').click()">
+              <i class="fas fa-camera"></i> Seleccionar
+            </button>
+            <span id="photoCount">0 fotos seleccionadas</span>
+            <div class="photo-previews" id="photoPreviews"></div>
+          </div>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Guardar
+          </button>
+          <button type="button" class="btn btn-danger" id="cancelPropertyForm">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID Propiedad</th>
+            <th>Dirección</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Fotos</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Las filas de la tabla permanecen iguales pero sin el botón "Más fotos" -->
+          <tr>
+            <td>PROP-125</td>
+            <td>Av. Principal 123</td>
+            <td>Casa</td>
+            <td>$250,000</td>
+            <td>
+              <div class="property-thumbnails">
+                <img src="assets/propiedades/prop1-thumb.jpg" alt="Miniatura propiedad 125" class="thumbnail">
+              </div>
+            </td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Editar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+   <!-- Sección Visitas -->
+    <div class="section-title">
+      <h2><i class="fas fa-home"></i>Proximas visitas</h2>
+      <button class="btn btn-primary" id="togglePropertyForm">
+        <i class="fas fa-save"></i> Actualizar
+      </button>
+    </div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Fecha/Hora</th>
+            <th>Cliente</th>
+            <th>Propiedad</th>
+            <th>Estado</th>
+            <th>Gestión</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>25/10/2023 - 10:00 AM</td>
+            <td>María González</td>
+            <td>Av. Principal 123</td>
+            <td><span class="status scheduled">Confirmada</span></td>
+            <td>
+              <div class="status-actions">
+                <button class="btn-status pending" data-visit-id="1" title="Marcar como Pendiente">
+                  <i class="fas fa-clock"></i>
+                </button>
+                <button class="btn-status completed" data-visit-id="1" title="Marcar como Realizada">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="btn-status cancelled" data-visit-id="1" title="Cancelar Visita">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>26/10/2023 - 04:00 PM</td>
+            <td>Carlos Mendoza</td>
+            <td>Calle Secundaria 456</td>
+            <td><span class="status pending">Pendiente</span></td>
+            <td>
+              <div class="status-actions">
+                <button class="btn-status pending" data-visit-id="2" title="Marcar como Pendiente">
+                  <i class="fas fa-clock"></i>
+                </button>
+                <button class="btn-status completed" data-visit-id="2" title="Marcar como Realizada">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="btn-status cancelled" data-visit-id="2" title="Cancelar Visita">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>27/10/2023 - 11:30 AM</td>
+            <td>Ana Torres</td>
+            <td>Boulevard Norte 789</td>
+            <td><span class="status cancelled">Cancelada</span></td>
+            <td>
+              <div class="status-actions">
+                <button class="btn-status pending" data-visit-id="3" title="Marcar como Pendiente">
+                  <i class="fas fa-clock"></i>
+                </button>
+                <button class="btn-status completed" data-visit-id="3" title="Marcar como Realizada">
+                  <i class="fas fa-check"></i>
+                </button>
+                <button class="btn-status cancelled" data-visit-id="3" title="Cancelar Visita">
+                  <i class="fas fa-times"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+      <!-- Sección Contratos -->
+    <div class="section-title">
+      <h2><i class="fas fa-file-contract"></i> Tus Contratos</h2>
+      <button class="btn btn-success" id="toggleContractForm">
+        <i class="fas fa-plus"></i> Nuevo Contrato
+      </button>
+    </div>
+
+    <!-- Formulario Horizontal -->
+    <div id="contractFormContainer" style="display: none; margin-bottom: 2rem;">
+      <form id="contractForm" class="horizontal-form">
+        <div class="form-group">
+          <label for="contractProperty">Propiedad</label>
+          <select id="contractProperty" required>
+            <option value="">Seleccionar propiedad</option>
+            <option value="Av. Principal 123">Av. Principal 123 (Casa)</option>
+            <option value="Calle Secundaria 456">Calle Secundaria 456 (Departamento)</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="contractClient">Cliente</label>
+          <select id="contractClient" required>
+            <option value="">Seleccionar cliente</option>
+            <option value="María González">María González</option>
+            <option value="Carlos Mendoza">Carlos Mendoza</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="contractType">Tipo</label>
+          <select id="contractType" required>
+            <option value="">Seleccionar tipo</option>
+            <option value="Venta">Venta</option>
+            <option value="Alquiler">Alquiler</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="contractStart">Fecha Inicio</label>
+          <input type="date" id="contractStart" required>
+        </div>
+        
+        <div class="form-group" id="endDateGroup" style="display: none;">
+          <label for="contractEnd">Fecha Fin (Alquiler)</label>
+          <input type="date" id="contractEnd">
+        </div>
+        
+        <div class="form-group">
+          <label for="contractPrice">Precio</label>
+          <input type="text" id="contractPrice" placeholder="Ej: $250,000 o $1,200/mes" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contractId">ID Contrato</label>
+          <input type="text" id="contractId" placeholder="CT-2023-N01-AHG" required>
+        </div>
+        
+        <div class="form-group full-width">
+          <label for="contractClauses">Cláusulas Adicionales</label>
+          <textarea id="contractClauses" rows="3" placeholder="Descripción detallada de términos y condiciones..."></textarea>
+        </div>
+        
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-save"></i> Generar Contrato
+          </button>
+          <button type="button" class="btn btn-danger" id="cancelContractForm">
+            Cancelar
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Tabla de Contratos -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID Contrato</th>
+            <th>Propiedad</th>
+            <th>Cliente</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CT-2023-N01-AHG</td>
+            <td>Av. Principal 123</td>
+            <td>María González</td>
+            <td><span class="contract-type sale">Venta</span></td>
+            <td>$250,000</td>
+            <td>
+              <div class="action-buttons">
+                <button class="btn btn-primary btn-sm view-contract" data-contract='{
+                  "id":"CT-2023-N01-AHG",
+                  "property":"Av. Principal 123",
+                  "client":"María González",
+                  "agent":"Ana Herrera G.",
+                  "date":"15/10/2023",
+                  "type":"Venta",
+                  "price":"$250,000",
+                  "clauses":[
+                    "El pago se realizará en su totalidad al momento de la firma de escrituras.",
+                    "La propiedad se entrega libre de ocupantes y en las condiciones actuales.",
+                    "Cualquier modificación deberá ser aprobada por ambas partes por escrito."
+                  ]
+                }'>
+                  <i class="fas fa-eye"></i> Ver/PDF
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal para visualizar contrato -->
+    <div id="contractModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div id="contractContent"></div>
+        <button id="downloadPdf" class="btn btn-primary" style="margin-top: 1rem;">
+          <i class="fas fa-file-pdf"></i> Descargar PDF
+        </button>
+      </div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+<script src="/chatsocketio/loader.js"></script>
+
+</body>
+</html>
