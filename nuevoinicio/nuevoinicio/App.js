@@ -133,6 +133,7 @@ app.get('/api/visitas/disponibilidad', async (req, res) => {
 require('./socket')(io); // tu archivo de sockets
 // Ruta para interactuar con Ollama desde el frontend
 // Ruta para interactuar con Ollama desde el frontend
+// Ruta para interactuar con Ollama desde el frontend
 app.post('/api/generate', async (req, res) => {
   const { model = 'llama2', prompt, stream = false } = req.body;
 
@@ -165,6 +166,7 @@ app.post('/api/generate', async (req, res) => {
     res.status(500).json({ error: 'No se pudo obtener respuesta de Ollama' });
   }
 });
+
 // ✅ Iniciar servidor
 server.listen(PORT, () => {
   console.log(`✅ Servidor con Socket.IO activo en http://localhost:${PORT}`);
