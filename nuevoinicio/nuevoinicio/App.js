@@ -21,14 +21,14 @@ const PORT = 3000;
 
 const contratoRoutes = require('./routers/contratos');
 
-
+const generateRouter = require('./routers/generate');
 // Conexión a DB
 connectDB();
 
 // Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(generateRouter);
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -88,6 +88,28 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
+const clientesRoutes = require('./routers/clientes'); // o donde esté tu ruta
+app.use("/api", clientesRoutes);
+const Cliente = require("./models/Cliente"); // Asegúrate de que el modelo esté bien importado
+
+async function crearClientesPrueba() {
+  const clientes = [
+    { nombre: "Juan Pérez", correo: "juan@example.com", telefono: "987654321" },
+    { nombre: "Ana Torres", correo: "ana@example.com", telefono: "912345678" },
+    { nombre: "Carlos Ruiz", correo: "carlos@example.com", telefono: "911222333" }
+  ];
+
+  try {
+    await Cliente.insertMany(clientes);
+    console.log("Clientes de prueba insertados correctamente");
+  } catch (err) {
+    console.error("Error al insertar clientes:", err.message);
+  }
+}
+
+// Llama la función una sola vez
+crearClientesPrueba();
+app.use('/', generateRouter);
 // Iniciar servidor con Socket.IO
 server.listen(PORT, () => {
   console.log(`✅ Servidor con Socket.IO activo en http://localhost:${PORT}`);

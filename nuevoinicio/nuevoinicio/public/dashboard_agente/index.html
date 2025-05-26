@@ -27,7 +27,7 @@
   <aside class="sidebar">
   <div class="logo">🏠 AGENTE </div>
   <nav class="menu">
-    <a href="#" id="link-dashboard">Dashboard</a>
+    <a href="#" id="link-cliente">clientes</a>
     <a href="#" id="link-propiedades">Propiedades</a>
     <a href="#" id="link-visitas">Visitas</a>
     <a href="#" id="link-contratos">Contratos</a>
@@ -47,6 +47,18 @@
       </div>
     </div>
   </header>
+<!-- SECCIÓN: CLIENTES -->
+<section id="section-clientes" class="section hidden">
+  <h3>Listado de Clientes</h3>
+  <input type="text" id="buscarCliente" placeholder="Buscar cliente...">
+ 
+
+  <!-- Contenedor de tarjetas de clientes -->
+  <div id="clientesContainer" class="row">
+    <!-- Aquí se añadirán los clientes desde JS -->
+  </div>
+</section>
+
 
   <!-- SECCIÓN: PROPIEDADES -->
    
@@ -181,12 +193,8 @@
 
   <script>
   // Mapeo de secciones según el texto del enlace
-  const secciones = {
-    "Dashboard": "section-propiedades",
-    "Propiedades": "section-propiedades",
-    "Visitas": "section-visitas",
-    "Contratos": "section-contratos"
-  };
+ 
+document.getElementById("infoAgente").innerText = "Tu agente se llama María Rodríguez";
 
   // Agrega el evento a todos los enlaces del menú
   document.querySelectorAll('.sidebar .menu a').forEach(link => {
@@ -334,16 +342,89 @@ tbody.addEventListener('click', async e => {
 });
 // dashboard.js
 
-// API GET /api/clientes-agente/:agenteId
-const clientes = await Usuario.find({ 
-  rol: 'cliente', 
-  agenteAsignado: req.params.agenteId 
-});
-
 
 
 // Carga inicial
 cargarPropiedades();
+ 
+
+// Manejo de visibilidad de secciones
+  const secciones = {
+    cliente: document.getElementById("section-clientes"),
+    propiedades: document.getElementById("section-propiedades"),
+    visitas: document.getElementById("section-visitas"),
+    contratos: document.getElementById("section-contratos")
+  };
+
+  function mostrarSeccion(id) {
+    Object.values(secciones).forEach(sec => sec.classList.add("hidden"));
+    secciones[id].classList.remove("hidden");
+  }
+
+  document.getElementById("link-cliente").addEventListener("click", () => mostrarSeccion("cliente"));
+  document.getElementById("link-propiedades").addEventListener("click", () => mostrarSeccion("propiedades"));
+  document.getElementById("link-visitas").addEventListener("click", () => mostrarSeccion("visitas"));
+  document.getElementById("link-contratos").addEventListener("click", () => mostrarSeccion("contratos"));
+
+
+ 
+  async function cargarClientes() {
+    try {
+      const res = await fetch("http://localhost:3000/api/clientes");
+      const clientes = await res.json();
+      mostrarClientes(clientes);
+    } catch (error) {
+      console.error("Error al cargar clientes:", error);
+    }
+  }
+
+  function mostrarClientes(clientes) {
+    const container = document.getElementById("clientesContainer");
+    container.innerHTML = "";
+
+    clientes.forEach(c => {
+      const card = document.createElement("div");
+      card.className = "col-md-4";
+      card.innerHTML = `
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">${c.nombre}</h5>
+            <p><strong>Correo:</strong> ${c.correo}</p>
+            <p><strong>Teléfono:</strong> ${c.telefono}</p>
+            <button class="btn btn-primary">Ver Detalles</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  // Buscar cliente
+  document.getElementById("buscarCliente").addEventListener("input", async (e) => {
+    const texto = e.target.value.toLowerCase();
+    const res = await fetch("http://localhost:3000/api/clientes");
+    const clientes = await res.json();
+
+    const filtrados = clientes.filter(c =>
+      c.nombre.toLowerCase().includes(texto) || c.correo.toLowerCase().includes(texto)
+    );
+
+    mostrarClientes(filtrados);
+  });
+
+  // Llamada inicial
+  cargarClientes();
+
+document.getElementById("link-cliente").addEventListener("click", () => {
+  mostrarSeccion("clientes");
+});
+
+function mostrarSeccion(seccion) {
+  document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
+  document.getElementById(`section-${seccion}`).classList.remove("hidden");
+}
+
+
 
 </script>
 <script src="js/dashboard.js"></script>

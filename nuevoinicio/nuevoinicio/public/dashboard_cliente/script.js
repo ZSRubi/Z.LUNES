@@ -173,3 +173,4 @@
 // API GET /api/mi-agente/:clienteId
 const cliente = await Usuario.findById(clienteId).populate('agenteAsignado');
 
+document.getElementById("infoAgenteCliente").innerText = "Tu agente es: rubi chambi";
