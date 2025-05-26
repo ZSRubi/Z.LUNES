@@ -170,4 +170,6 @@
       doc.save('contrato.pdf');
     });
 
+// API GET /api/mi-agente/:clienteId
+const cliente = await Usuario.findById(clienteId).populate('agenteAsignado');
 

@@ -1,4 +1,4 @@
-const Property = require('../models/propiedadModel');
+const Property = require('../models/Propiedad');
 const fs = require('fs');
 const path = require('path');
 

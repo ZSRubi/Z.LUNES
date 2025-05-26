@@ -372,14 +372,15 @@
           
           // Redirigir según el rol
           setTimeout(() => {
-            if (data.rol === 'administrador') {
-              window.location.href = 'dashboard_admin/index.html';
-            } else if (data.rol === 'agente') {
-              window.location.href = 'dashboard_agente/index.html';
-            } else {
-              window.location.href = 'dashboard_cliente/index.html';
-            }
-          }, 1000);
+  if (data.rol === 'admin') {
+    window.location.href = 'dashboard_admin/index.html';
+  } else if (data.rol === 'agente') {
+    window.location.href = 'dashboard_agente/index.html';
+  } else {
+    window.location.href = 'dashboard_cliente/index.html';
+  }
+}, 1000);
+
         
 
         // if (res.ok) {

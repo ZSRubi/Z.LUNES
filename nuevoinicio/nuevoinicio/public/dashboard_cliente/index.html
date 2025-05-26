@@ -194,158 +194,19 @@
         </div>
     </section>
   
-    <!-- Sección combinada de visitas -->
-<div class="dashboard-section">
-  <div class="section-title" style="display: flex; justify-content: space-between; align-items: center;">
-    <h2><i class="fas fa-calendar-alt"></i> Gestionar Visitas</h2>
-  </div>
-  
-  <div class="visits-section">
-    <!-- Formulario horizontal -->
-     
-    <div class="visits-form-container">
-      <form id="solicitarVisitaForm" action="/programar-visita?origin=dashboard1" method="POST" enctype="application/x-www-form-urlencoded">
-        <h3><i class="fas fa-plus-circle"></i> Programar Nueva Visita</h3>
-        
-        <div class="form-row">
-          <div class="form-group-horizontal">
-            <label for="propiedadVisita"><i class="fas fa-home"></i> Propiedad</label>
-            <select id="propiedadVisita" name="propiedadVisita" required>
-              <option value="">Seleccionar propiedad</option>
-              <option value="PROP-001">Casa</option>
-              <option value="PROP-002">Departamento</option>
-              <option value="PROP-003">Oficina</option>
-              <option value="PROP-003">Terreno</option>
-            </select>
-          </div>
-      
-          <div class="form-group-horizontal">
-            <label for="fechaVisita"><i class="far fa-calendar"></i> Fecha</label>
-            <input type="date" id="fechaVisita" name="fechaVisita" required>
-          </div>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group-horizontal">
-            <label for="horaVisita"><i class="far fa-clock"></i> Hora</label>
-            <select id="horaVisita" name="horaVisita" required>
-              <option value="">Seleccionar hora</option>
-              <option value="09:00">9:00 AM</option>
-              <option value="10:00">10:00 AM</option>
-              <option value="11:00">11:00 AM</option>
-              <option value="15:00">3:00 PM</option>
-              <option value="16:00">4:00 PM</option>
-            </select>
-          </div>
-          
-          <div class="form-group-horizontal">
-            <label for="clienteVisita"><i class="fas fa-user"></i> Cliente</label>
-            <select id="clienteVisita" name="clienteVisita" required>
-              <option value="">Seleccionar cliente</option>
-              <option value="CLI-001">María González</option>
-              <option value="CLI-002">Jose Mendoza</option>
-              <option value="CLI-003">Ana Torres</option>
-            </select>
-          </div>
-        </div>
-        
-        <div class="form-actions-horizontal">
-          <button type="reset" class="btn-action" style="background-color: var(--color-gris-claro);">
-            <i class="fas fa-times"></i> Limpiar
-          </button>
-          <button type="submit" class="btn-action">
-            <i class="fas fa-paper-plane"></i> Programar Visita
-          </button>
-        </div>
-      </form>
-    </div>
-    
-    <!-- Tabla de visitas -->
-    <div class="visits-table-container">
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Fecha/Hora</th>
-              <th>Cliente</th>
-              <th>Propiedad</th>
-              <th>Estado</th>
-              <th>Gestión</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>25/10/2023 - 10:00 AM</td>
-              <td>María González</td>
-              <td>Casa Residencial en Bosque</td>
-              <td><span class="status scheduled">Confirmada</span></td>
-              <td>
-                <div class="status-actions">
-                  <button class="btn-status pending" data-visit-id="1" title="Marcar como Pendiente">
-                    <i class="fas fa-clock"></i>
-                  </button>
-                  <button class="btn-status completed" data-visit-id="1" title="Marcar como Realizada">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="btn-status cancelled" data-visit-id="1" title="Cancelar Visita">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>26/10/2023 - 04:00 PM</td>
-              <td>Carlos Mendoza</td>
-              <td>Departamento Premium</td>
-              <td><span class="status pending">Pendiente</span></td>
-              <td>
-                <div class="status-actions">
-                  <button class="btn-status pending" data-visit-id="2" title="Marcar como Pendiente">
-                    <i class="fas fa-clock"></i>
-                  </button>
-                  <button class="btn-status completed" data-visit-id="2" title="Marcar como Realizada">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="btn-status cancelled" data-visit-id="2" title="Cancelar Visita">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>27/10/2023 - 11:30 AM</td>
-              <td>Ana Torres</td>
-              <td>Oficina Corporativa</td>
-              <td><span class="status cancelled">Cancelada</span></td>
-              <td>
-                <div class="status-actions">
-                  <button class="btn-status pending" data-visit-id="3" title="Marcar como Pendiente">
-                    <i class="fas fa-clock"></i>
-                  </button>
-                  <button class="btn-status completed" data-visit-id="3" title="Marcar como Realizada">
-                    <i class="fas fa-check"></i>
-                  </button>
-                  <button class="btn-status cancelled" data-visit-id="3" title="Cancelar Visita">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+<h5>Agente Asignado: ${cliente.agenteAsignado.nombre}</h5>
+<p>Correo: ${cliente.agenteAsignado.correo}</p>
+<p>Teléfono: ${cliente.agenteAsignado.telefono}</p>
 
   
 
 
 </div>
-<script src="./script.js"></script>
-
-<script src="/socket.io/socket.io.js"></script>
+  <script src="./script.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
 <script src="/chatsocketio/loader.js"></script>
+<script src="/chatia/loader.js"></script>
 
 </body>
 </html>

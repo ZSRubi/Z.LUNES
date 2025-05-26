@@ -1,139 +1,63 @@
-
 const express = require('express');
 const path = require('path');
-const http = require('http'); // 👈 necesario para Socket.IO
-const socketIO = require('socket.io'); // 👈 importar socket.io
-const connectDB = require('./database/connection');
-const userRoutes = require('./routers/userRouters');
-const propertyRoutes = require('./routers/propiedadRouters');
-const mongoose = require('mongoose');  // Mueve esto arriba
-const Message = mongoose.models.Message || mongoose.model('Message', require('./models/messageModel').messageSchema); // Corregir la forma en que se maneja el modelo
-const app = express();
-const server = http.createServer(app); // 👈 aquí creamos el servidor HTTP
-const io = socketIO(server); // 👈 aquí montamos socket.io sobre ese servidor
-const PORT = 3000;
+const http = require('http');
+const socketIO = require('socket.io');
+const mongoose = require('mongoose');
+const multer = require('multer');
 const fetch = require('node-fetch');
 
-// Conexión a la base de datos
+
+const connectDB = require('./database/connection');
+const userRoutes = require('./routers/userRouters');
+const propertyRoutes = require('./routers/propiedades'); // Usa una sola y mantén la convención
+const Message = mongoose.models.Message || mongoose.model('Message', require('./models/messageModel').messageSchema);
+const visitasRouter = require('./routers/visitas');
+
+
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+const PORT = 3000;
+
+const contratoRoutes = require('./routers/contratos');
+
+
+// Conexión a DB
 connectDB();
 
-// Middleware
+// Middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Modelos
-const visitaSchema = new mongoose.Schema({
-  propiedad: String,
-  fecha: Date,
-  hora: String,
-  agente: String,
-  estado: { type: String, default: 'pendiente' },
-  dashboardOrigin: String,
-  fechaCreacion: { type: Date, default: Date.now }
-});
-const Visita = mongoose.model('Visita', visitaSchema);
-
-const contratoSchema = new mongoose.Schema({
-  property: String,
-  client: String,
-  type: String,
-  start: Date,
-  end: Date,
-  price: String,
-  contractId: String,
-  clauses: String,
-  createdAt: { type: Date, default: Date.now }
-});
-const ContractMongo = mongoose.model('Contract', contratoSchema);
-
-// Rutas
-app.use('/api/usuarios', userRoutes);
-app.use('/api/properties', propertyRoutes);
-
-app.post('/programar-visita', async (req, res) => {
-  try {
-    const { propiedadVisita, fechaVisita, horaVisita, clienteVisita } = req.body;
-    const origin = req.query.origin || 'unknown';
-
-    const nuevaVisita = new Visita({
-      propiedad: propiedadVisita,
-      fecha: new Date(fechaVisita),
-      hora: horaVisita,
-      cliente: clienteVisita,
-      dashboardOrigin: origin,
-      estado: 'pendiente',
-      creadoPor: 'some_user_id'
-    });
-
-    await nuevaVisita.save();
-
-    if (req.headers['x-requested-with'] === 'XMLHttpRequest') {
-      res.json({ success: true, message: 'Visita programada exitosamente' });
-    } else {
-      res.redirect(`/dashboard_cliente.html?visita=success`);
-    }
-  } catch (error) {
-    console.error('Error al programar visita:', error);
-    res.status(500).json({ error: 'Error al programar la visita' });
-  }
-});
-
-app.post('/api/contracts', async (req, res) => {
-  try {
-    const { property, client, type, start, end, price, contractId, clauses } = req.body;
-
-    const nuevoContrato = new ContractMongo({
-      property,
-      client,
-      type,
-      start: new Date(start),
-      end: end ? new Date(end) : null,
-      price,
-      contractId,
-      clauses: JSON.stringify(clauses)
-    });
-
-    await nuevoContrato.save();
-    res.status(201).json({ success: true, message: 'Contrato guardado correctamente en MongoDB' });
-  } catch (error) {
-    console.error('Error al guardar contrato:', error);
-    res.status(500).json({ success: false, message: 'Error al guardar el contrato' });
-  }
-});
-
 // Archivos estáticos
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Rutas API
+app.use('/api/usuarios', userRoutes);
+app.use('/api/propiedades', propertyRoutes);  // Solo una ruta para propiedades
+app.use('/api/visitas', visitasRouter);
+
+app.use('/api/contratos', contratoRoutes);
+app.use(visitasRouter);
 
 // Ruta principal
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 });
-
-// Verificar disponibilidad
-app.get('/api/visitas/disponibilidad', async (req, res) => {
+// Define la ruta GET para obtener todas las propiedades
+app.get('/api/propiedades', async (req, res) => {
   try {
-    const { fecha, hora, propiedad } = req.query;
-
-    const visitaExistente = await Visita.findOne({
-      propiedad: propiedad,
-      fecha: new Date(fecha),
-      hora: hora,
-      estado: { $ne: 'cancelada' }
-    });
-
-    res.json({ disponible: !visitaExistente });
+    const propiedades = await Propiedad.find();
+    res.json(propiedades);
   } catch (error) {
-    console.error('Error al verificar disponibilidad:', error);
-    res.status(500).json({ error: 'Error al verificar disponibilidad' });
+    res.status(500).json({ message: 'Error al obtener propiedades' });
   }
 });
+// Socket.IO
+require('./socket')(io);
 
-// 👉 Cargar lógica del chat
-require('./socket')(io); // tu archivo de sockets
-// Ruta para interactuar con Ollama desde el frontend
-// Ruta para interactuar con Ollama desde el frontend
-// Ruta para interactuar con Ollama desde el frontend
+// Ruta para interactuar con Ollama
 app.post('/api/generate', async (req, res) => {
   const { model = 'llama2', prompt, stream = false } = req.body;
 
@@ -142,15 +66,13 @@ app.post('/api/generate', async (req, res) => {
   }
 
   try {
-    // Verificamos si Ollama está en funcionamiento
-    const check = await fetch('http://localhost:11434');  // Aquí verificamos si Ollama responde
+    const check = await fetch('http://localhost:11434');
     if (!check.ok) throw new Error('Ollama no está disponible');
 
-    // Enviar la petición a Ollama
     const response = await fetch('http://localhost:11434/api/generate', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model, prompt, stream })
+      body: JSON.stringify({ model, prompt, stream }),
     });
 
     if (!response.ok) {
@@ -159,18 +81,18 @@ app.post('/api/generate', async (req, res) => {
     }
 
     const data = await response.json();
-    res.json(data);  // Enviar la respuesta de Ollama al frontend
-
+    res.json(data);
   } catch (err) {
     console.error('❌ Error al conectar con Ollama:', err.message || err);
     res.status(500).json({ error: 'No se pudo obtener respuesta de Ollama' });
   }
 });
 
-// ✅ Iniciar servidor
+// Iniciar servidor con Socket.IO
 server.listen(PORT, () => {
   console.log(`✅ Servidor con Socket.IO activo en http://localhost:${PORT}`);
 });
+
 
 
 
